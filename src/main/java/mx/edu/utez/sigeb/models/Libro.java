@@ -8,7 +8,6 @@ public class Libro {
     private long stock;
     private String autor;
     private String categoria;
-    private String file_name;
     public Libro() {
     }
     public Libro(long id, String name, long stock, String autor, String categoria, String file_name) {
@@ -17,7 +16,6 @@ public class Libro {
         this.stock = stock;
         this.autor = autor;
         this.categoria = categoria;
-        this.file_name = file_name;
     }
     public long getId() {
         return id;
@@ -48,11 +46,5 @@ public class Libro {
     }
     public void setCategoria(String categoria) {
         this.categoria = categoria;
-    }
-    public String getFile_name() {
-        return file_name;
-    }
-    public void setFile_name(String file_name) {
-        this.file_name = file_name;
     }
 }
