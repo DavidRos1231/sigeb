@@ -1,4 +1,4 @@
-package mx.edu.utez.sigeb.controllers;
+package mx.edu.utez.sigeb.controllers.libro;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
