@@ -1,6 +1,7 @@
 package mx.edu.utez.sigeb.models.libro;
 
 
+import org.json.simple.JSONObject;
 
 public class Libro {
     private long id;
@@ -46,5 +47,23 @@ public class Libro {
     }
     public void setCategoria(String categoria) {
         this.categoria = categoria;
+    }
+
+    public String datos(int num){
+        String datos[]={id+"",name,stock+"", autor,categoria};
+        return datos[num];
+    }
+    public String getdatos(int num){
+        String datos[]={getId()+"",getName(),getStock()+"", getAutor(),getCategoria()};
+        return datos[num];
+    }
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("id", this.id);
+        json.put("name", this.name);
+        json.put("stock", this.stock);
+        json.put("autor", this.autor);
+        json.put("categoria", this.categoria);
+        return json;
     }
 }
