@@ -20,6 +20,13 @@ public class Usuario {
         this.password=password;
         this.tipo=tipo;
     }
+    
+    //has un toString para que te muestre los datos de la tabla
+    @Override
+    public String toString() {
+        return "Usuario{" + "_id=" + id + ", name=" + name + ", midname=" + midname + ", lastname=" + lastname + 
+                ", correo=" + correo + ", password=" + password + ", tipo=" + tipo + '}';
+    }
 
     public String getId() {
         return id;
