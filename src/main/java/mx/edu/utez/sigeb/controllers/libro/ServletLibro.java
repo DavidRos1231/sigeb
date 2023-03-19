@@ -28,12 +28,13 @@ public class ServletLibro extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String opcion = request.getServletPath();
         System.out.println(opcion);
-        HttpServletRequest req= (HttpServletRequest) request;
-        switch (opcion){
+        HttpServletRequest req = (HttpServletRequest) request;
+        switch (opcion) {
             case "/getLibro":
-                String matricula = request.getParameter("id") !=null? request.getParameter("id"):"";
-                Libro libro= new Libro();
-                libro= new ServiceLibro().getLibro(matricula);
+                String matricula = request.getParameter("id") != null ? request.getParameter("id") : "";
+                int matriculaInt = Integer.parseInt(matricula);
+                Libro libro = new Libro();
+                libro = new ServiceLibro().getLibro(matriculaInt);
                 response.setContentType("application/json");
                 response.setCharacterEncoding("UTF-8");
                 PrintWriter out = response.getWriter();
@@ -46,10 +47,11 @@ public class ServletLibro extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String opcion = request.getServletPath();
-        HttpServletRequest req= (HttpServletRequest) request;
-        switch (opcion){
+        HttpServletRequest req = (HttpServletRequest) request;
+        switch (opcion) {
             case "/addLibro":
                 System.out.println("addlibro");
+
                 break;
             case "/updateLibro":
                 System.out.println("updateLibro");

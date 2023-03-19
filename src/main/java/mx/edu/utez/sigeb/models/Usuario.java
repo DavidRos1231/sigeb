@@ -20,7 +20,10 @@ public class Usuario {
         this.password=password;
         this.tipo=tipo;
     }
-    
+
+    public Usuario(String juan, String pedro, String michele, String s, String s1, int i) {
+    }
+
     //has un toString para que te muestre los datos de la tabla
     @Override
     public String toString() {
