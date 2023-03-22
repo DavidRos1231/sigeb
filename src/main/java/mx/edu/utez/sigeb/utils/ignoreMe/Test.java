@@ -5,7 +5,10 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.result.InsertOneResult;
+import mx.edu.utez.sigeb.controllers.libro.ServiceLibro;
 import mx.edu.utez.sigeb.models.Usuario;
+import mx.edu.utez.sigeb.models.libro.DaoLibro;
+import mx.edu.utez.sigeb.models.libro.Libro;
 import mx.edu.utez.sigeb.utils.Conn;
 import org.bson.Document;
 import org.bson.codecs.configuration.CodecProvider;
@@ -38,18 +41,15 @@ public class Test {
                 //this line is for get the collection
                 MongoCollection<Usuario> collection = database.getCollection("usuarios", Usuario.class);
 
+                Libro libro = new Libro("Dios aquí","Enrique Cevallos","Historia");
 
-
-                Usuario niño = new Usuario("","juan","pedro","michele","pedro@crreo","123",1);
-                niño.setId("43");
-                InsertOneResult result = collection.insertOne(niño);
-                System.out.println(result.getInsertedId());
-
-                /*if (result!=null) {
-                    System.out.println("se registro el usuario");
-                } else {
-                    System.out.println("No se pudo registrar el usuario");
-                }*/
+                List<Libro> listado = new ArrayList<>();
+               ServiceLibro serviceLibro = new ServiceLibro();
+               listado = serviceLibro.listLibros();
+                //imprimir listado
+                for (Libro libro1 : listado) {
+                    System.out.println(libro1.toJson());
+                }
             } else {
                 System.out.println("No se pudo realizar la conexión");
             }

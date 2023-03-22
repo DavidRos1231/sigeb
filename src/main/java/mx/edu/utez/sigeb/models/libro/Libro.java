@@ -4,31 +4,31 @@ package mx.edu.utez.sigeb.models.libro;
 import org.json.simple.JSONObject;
 
 public class Libro {
-    private long id;
-    private String name;
+    private long libroId;
+    private String nombre;
     private long stock;
     private String autor;
     private String categoria;
+
+    //no falta un enable??
     public Libro() {
     }
-    public Libro(long id, String name, long stock, String autor, String categoria, String file_name) {
-        this.id = id;
-        this.name = name;
-        this.stock = stock;
+    public Libro(String nombre, String autor, String categoria) {
+        this.nombre = nombre;
         this.autor = autor;
         this.categoria = categoria;
     }
-    public long getId() {
-        return id;
+    public long getLibroId() {
+        return libroId;
     }
-    public void setId(long id) {
-        this.id = id;
+    public void setLibroId(long libroId) {
+        this.libroId = libroId;
     }
-    public String getName() {
-        return name;
+    public String getNombre() {
+        return nombre;
     }
-    public void setName(String name) {
-        this.name = name;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
     public long getStock() {
         return stock;
@@ -50,17 +50,17 @@ public class Libro {
     }
 
     public String datos(int num){
-        String datos[]={id+"",name,stock+"", autor,categoria};
+        String datos[]={libroId +"", nombre,stock+"", autor,categoria};
         return datos[num];
     }
     public String getdatos(int num){
-        String datos[]={getId()+"",getName(),getStock()+"", getAutor(),getCategoria()};
+        String datos[]={getLibroId()+"", getNombre(),getStock()+"", getAutor(),getCategoria()};
         return datos[num];
     }
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        json.put("id", this.id);
-        json.put("name", this.name);
+        json.put("id", this.libroId);
+        json.put("nombre", this.nombre);
         json.put("stock", this.stock);
         json.put("autor", this.autor);
         json.put("categoria", this.categoria);

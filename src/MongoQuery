@@ -1,12 +1,12 @@
 Siguiendo la estructura dada convierte los registros a formato JSON para mongodb. Omite el último campo de cada registro
-
+los _id no se ponen, los libroId y parecidos no se ponen
 //Libros
-_id: entero
+_id: entero automatico***
 nombre: string
 autor: string
 categoria: string
 enable: entero
-libroId: Long
+libroId: Long autoincrementable***
 
 --------------------------------------
 //Prestamos-Libros
@@ -35,7 +35,7 @@ ejempId: long
 
 //Salas
 _id: entero
-lugares: string
+lugares: entero
 hora: datetime
 descripcion:string
 enable: entero
