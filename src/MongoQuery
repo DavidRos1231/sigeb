@@ -1,12 +1,59 @@
 Siguiendo la estructura dada convierte los registros a formato JSON para mongodb. Omite el último campo de cada registro
-los _id no se ponen, los libroId y parecidos no se ponen
+los _id no se ponen son los que pone mongodb
+los libroId (y parecidos) no se ponen, son el id autoincrementable
+
 //Libros
-_id: entero automatico***
+_id: entero
 nombre: string
 autor: string
 categoria: string
 enable: entero
-libroId: Long autoincrementable***
+libroId: Long
+
+// Vistas //
+
+//listLibros
+db.createView("listLibros","libros",
+[
+  {
+    $lookup: {
+      from: "ejemplares",
+      localField: "libroId",
+      foreignField: "libroId",
+      as: "ejemplares_info"
+    }
+  },
+  {
+    $addFields: {
+      stock: {
+        $size: {
+          $filter: {
+            input: "$ejemplares_info",
+            as: "ejemplares",
+            cond: {
+              $eq: ["$$ejemplares.enable", 1]
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    $project: {
+      libroId: 1,
+      nombre: 1,
+      stock: 1,
+      autor: 1,
+      categoria: 1,
+      enable: 1,
+      _id: 0
+    }
+  }
+]
+)
+
+db.listLibros.find({})
+
 
 --------------------------------------
 //Prestamos-Libros
@@ -30,6 +77,43 @@ editorial: string
 enable: entero
 ejempId: long
 
+db.ejemplares.insertMany([
+  {"libroId": 1, "estado": 1, "descripcion": "Libro de aventuras", "editorial": "Editorial A", "enable": 1},
+{"libroId": 2, "estado": 0, "descripcion": "Libro de ciencia ficción", "editorial": "Editorial B", "enable": 1},
+{"libroId": 3, "estado": 1, "descripcion": "Libro de romance", "editorial": "Editorial C", "enable": 1},
+{"libroId": 1, "estado": 0, "descripcion": "Libro de misterio", "editorial": "Editorial A", "enable": 1},
+{"libroId": 2, "estado": 1, "descripcion": "Libro de historia", "editorial": "Editorial B", "enable": 1},
+{"libroId": 3, "estado": 1, "descripcion": "Libro de fantasía", "editorial": "Editorial C", "enable": 1},
+{"libroId": 1, "estado": 0, "descripcion": "Libro de terror", "editorial": "Editorial A", "enable": 1},
+{"libroId": 2, "estado": 1, "descripcion": "Libro de comedia", "editorial": "Editorial B", "enable": 1}
+])
+
+db.ejemplares.find({})
+
+db.ejemplares.aggregate([
+{
+$lookup: {
+from: "libros",
+localField: "libroId",
+foreignField: "libroId",
+as: "libro"
+}
+},
+{
+$unwind: "$libro"
+},
+{
+$project: {
+_id: "$_id",
+idlibro: "$idlibro",
+nombre: "$libro.nombre",
+estado: "$estado",
+descripcion: "$descripcion",
+enable: "$enable",
+editorial: "$editorial"
+}
+}
+])
 
 -------------------------------------
 

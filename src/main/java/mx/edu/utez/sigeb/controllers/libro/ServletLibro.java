@@ -34,7 +34,7 @@ public class ServletLibro extends HttpServlet {
                 String matricula = request.getParameter("id") != null ? request.getParameter("id") : "";
                 int matriculaInt = Integer.parseInt(matricula);
                 Libro libro = new Libro();
-                libro = new ServiceLibro().getLibro(matriculaInt);
+                //libro = new ServiceLibro().getLibro(matriculaInt);
                 response.setContentType("application/json");
                 response.setCharacterEncoding("UTF-8");
                 PrintWriter out = response.getWriter();

@@ -14,6 +14,8 @@ import org.bson.Document;
 import org.bson.codecs.configuration.CodecProvider;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,15 +43,13 @@ public class Test {
                 //this line is for get the collection
                 MongoCollection<Usuario> collection = database.getCollection("usuarios", Usuario.class);
 
-                Libro libro = new Libro("Dios aquí","Enrique Cevallos","Historia");
+                Libro libro = new Libro("Dios aquí", "Enrique Cevallos", "Historia");
 
-                List<Libro> listado = new ArrayList<>();
+            JSONArray listado = new JSONArray();
                ServiceLibro serviceLibro = new ServiceLibro();
                listado = serviceLibro.listLibros();
                 //imprimir listado
-                for (Libro libro1 : listado) {
-                    System.out.println(libro1.toJson());
-                }
+                System.out.println(listado);
             } else {
                 System.out.println("No se pudo realizar la conexión");
             }

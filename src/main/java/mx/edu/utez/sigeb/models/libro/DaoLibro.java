@@ -28,7 +28,7 @@ public class DaoLibro {
         List<Libro> listLibros = new ArrayList<>();
         try (MongoClient mongoClient = Conn.getConnection()) {
             MongoDatabase database = mongoClient.getDatabase("sigeb").withCodecRegistry(pojoCodecRegistry);
-            MongoCollection<Libro> collection = database.getCollection("libros", Libro.class);
+            MongoCollection<Libro> collection = database.getCollection("listLibros", Libro.class);
             MongoCursor<Libro> cursor = collection.find().iterator();
             while (cursor.hasNext()) {
                 listLibros.add(cursor.next());
