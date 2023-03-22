@@ -12,7 +12,9 @@ import java.util.List;
 import java.io.IOException;
 
 import mx.edu.utez.sigeb.models.libro.Libro;
+import mx.edu.utez.sigeb.utils.Mensajes;
 import org.bson.Document;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 
@@ -20,25 +22,36 @@ import org.json.simple.JSONObject;
         "/addLibro",
         "/updateLibro",
         "/deleteLibro",
-        "/getLibro"
+        "/getLibro",
+        "/getLibros"
 })
 public class ServletLibro extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String opcion = request.getServletPath();
-        System.out.println(opcion);
         HttpServletRequest req = (HttpServletRequest) request;
+        PrintWriter out = response.getWriter();
         switch (opcion) {
             case "/getLibro":
                 String matricula = request.getParameter("id") != null ? request.getParameter("id") : "";
                 int matriculaInt = Integer.parseInt(matricula);
-                Libro libro = new Libro();
-                //libro = new ServiceLibro().getLibro(matriculaInt);
+                JSONObject libro = new ServiceLibro().getLibro(matriculaInt);
                 response.setContentType("application/json");
                 response.setCharacterEncoding("UTF-8");
-                PrintWriter out = response.getWriter();
-                out.print(libro.toJson());
+                System.out.println(libro);
+                //string to json
+                JSONObject msg = new JSONObject();
+                msg.put("msg", Mensajes.noexiste);
+                out.print(libro!=null?libro:msg);
+                out.flush();
+                break;
+            case "/getLibros":
+                JSONArray libros = new JSONArray();
+                libros = new ServiceLibro().listLibros();
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                out.print(libros);
                 out.flush();
                 break;
         }

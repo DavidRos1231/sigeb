@@ -21,8 +21,7 @@ public class ServiceLibro {
     public JSONObject getLibro(long id) {
         DaoLibro daoLibro = new DaoLibro();
         Libro libro = daoLibro.getLibro(id);
-
-        return libro.toJson();
+        return libro!=null?libro.toJson():null;
     };
 
     public boolean saveLibro(Libro libro){

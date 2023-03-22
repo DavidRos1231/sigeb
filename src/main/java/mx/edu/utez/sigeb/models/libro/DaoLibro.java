@@ -12,6 +12,7 @@ import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 import org.bson.conversions.Bson;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,15 +41,16 @@ public class DaoLibro {
     }
 
     public Libro getLibro(long id) {
+        System.out.println(id);
         Libro libroObject = new Libro();
         try (MongoClient mongoClient = Conn.getConnection();) {
             MongoDatabase database = mongoClient.getDatabase("sigeb").withCodecRegistry(pojoCodecRegistry);
             MongoCollection<Libro> collection = database.getCollection("libros", Libro.class);
-            libroObject = collection.find(eq("_id", id)).first();
+            libroObject = collection.find(eq("id", id)).first();
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        System.out.println(libroObject);
         return libroObject;
     }
 

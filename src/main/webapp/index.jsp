@@ -9,6 +9,10 @@
 </h1>
 <br/>
 <a href="hello-servlet">Hello Servlet</a>
-<a href="getLibro">getLibro</a>
+<a href="getLibros">getLibro</a>
+<form action="getLibro" method="get">
+    <input type="text" name="id">
+    <button type="submit">Enviar</button>
+</form>
 </body>
 </html>
