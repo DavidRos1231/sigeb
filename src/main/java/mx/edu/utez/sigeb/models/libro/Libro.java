@@ -9,14 +9,14 @@ public class Libro {
     private long stock;
     private String autor;
     private String categoria;
-
-    //no falta un enable??
+    private int enable;
     public Libro() {
     }
     public Libro(String nombre, String autor, String categoria) {
         this.nombre = nombre;
         this.autor = autor;
         this.categoria = categoria;
+        this.enable = 1;
     }
     public long getLibroId() {
         return libroId;
@@ -47,6 +47,14 @@ public class Libro {
     }
     public void setCategoria(String categoria) {
         this.categoria = categoria;
+    }
+
+    public int getEnable() {
+        return enable;
+    }
+
+    public void setEnable(int enable) {
+        this.enable = enable;
     }
 
     public String datos(int num){
