@@ -84,6 +84,52 @@ db.createView("listLibros","libros",
   }
 ]);
 
+db.createView("getLibroById",
+  "libros",
+  [
+    {
+      $lookup: {
+        from: "ejemplares",
+        localField: "libroId",
+        foreignField: "libroId",
+        as: "ejemplares_info"
+      }
+    },
+    {
+      $addFields: {
+        stock: {
+          $size: {
+            $filter: {
+              input: "$ejemplares_info",
+              as: "ejemplares",
+              cond: {
+                $eq: ["$$ejemplares.enable", 1]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      $match: {
+        enable: 1,
+        libroId: ObjectId("$id") // convierte el valor de $id a ObjectId
+      }
+    },
+    {
+      $project: {
+        libroId: 1,
+        nombre: 1,
+        stock: 1,
+        autor: 1,
+        categoria: 1,
+        enable: 1,
+        _id: 0
+      }
+    }
+  ]
+);
+
 db.listLibros.drop()
 db.listLibros.find({})
 
