@@ -1,4 +1,4 @@
-package mx.edu.utez.sigeb.controllers.libro;
+package mx.edu.utez.sigeb.services;
 
 import mx.edu.utez.sigeb.models.libro.DaoLibro;
 import mx.edu.utez.sigeb.models.libro.Libro;

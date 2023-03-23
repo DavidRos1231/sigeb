@@ -3,17 +3,11 @@ package mx.edu.utez.sigeb.controllers.libro;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 
-import java.io.IOException;
-
-import mx.edu.utez.sigeb.models.libro.Libro;
+import mx.edu.utez.sigeb.services.ServiceLibro;
 import mx.edu.utez.sigeb.utils.Mensajes;
-import org.bson.Document;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 

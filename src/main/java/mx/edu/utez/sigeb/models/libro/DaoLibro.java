@@ -46,7 +46,17 @@ public class DaoLibro {
         try (MongoClient mongoClient = Conn.getConnection();) {
             MongoDatabase database = mongoClient.getDatabase("sigeb").withCodecRegistry(pojoCodecRegistry);
             MongoCollection<Libro> collection = database.getCollection("libros", Libro.class);
-            libroObject = collection.find(eq("id", id)).first();
+            MongoCursor<Libro> cursor = collection.find().iterator();
+            while(cursor.hasNext()){
+                Libro iter=cursor.next();
+                if(iter.getLibroId()==id){
+                    System.out.println(iter);
+                    libroObject=iter;
+                    break;
+                }else {
+                    libroObject=null;
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

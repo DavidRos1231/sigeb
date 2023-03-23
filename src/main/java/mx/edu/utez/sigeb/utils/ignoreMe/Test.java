@@ -1,24 +1,16 @@
 package mx.edu.utez.sigeb.utils.ignoreMe;
 
 import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.result.InsertOneResult;
-import mx.edu.utez.sigeb.controllers.libro.ServiceLibro;
+import mx.edu.utez.sigeb.services.ServiceLibro;
 import mx.edu.utez.sigeb.models.Usuario;
-import mx.edu.utez.sigeb.models.libro.DaoLibro;
 import mx.edu.utez.sigeb.models.libro.Libro;
 import mx.edu.utez.sigeb.utils.Conn;
-import org.bson.Document;
 import org.bson.codecs.configuration.CodecProvider;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static com.mongodb.MongoClientSettings.getDefaultCodecRegistry;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
