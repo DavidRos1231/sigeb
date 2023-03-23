@@ -30,4 +30,13 @@ public class ServiceLibro {
     }
 
 
+    public boolean updateLibro(Libro libro){
+        DaoLibro daoLibro=new DaoLibro();
+        return daoLibro.updateLibro(libro);
+    }
+
+    public boolean deleteLibro(long id){
+        DaoLibro daoLibro=new DaoLibro();
+        return daoLibro.deleteLibro(id);
+    }
 }

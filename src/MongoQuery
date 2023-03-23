@@ -2,6 +2,11 @@ Siguiendo la estructura dada convierte los registros a formato JSON para mongodb
 los _id no se ponen son los que pone mongodb
 los libroId (y parecidos) no se ponen, son el id autoincrementable
 
+
+**
+Conexion para Visual Studio Code: mongodb+srv://20213tn128:9MuEp7pR5btT1xVb@dbsigeb.pyhq9x8.mongodb.net/sigeb
+*+
+
 //Libros
 _id: entero
 nombre: string
@@ -10,11 +15,39 @@ categoria: string
 enable: entero
 libroId: Long
 
+db.libros.insertMany([
+ {
+  "nombre": "El gran Gatsby",
+  "autor": "F. Scott Fitzgerald",
+  "categoria": "Ficción",
+  "enable": 1
+},
+{
+  "nombre": "La rebelión de Atlas",
+  "autor": "Ayn Rand",
+  "categoria": "Filosofía",
+  "enable": 0
+},
+{
+  "nombre": "Historia de dos ciudades",
+  "autor": "Charles Dickens",
+  "categoria": "Clásicos",
+  "enable": 1
+}
+
+])
+
+
 // Vistas //
 
-//listLibros
+//view listLibros
 db.createView("listLibros","libros",
 [
+  {
+    $match: {
+      enable: 1
+    }
+  },
   {
     $lookup: {
       from: "ejemplares",
@@ -49,9 +82,9 @@ db.createView("listLibros","libros",
       _id: 0
     }
   }
-]
-)
+]);
 
+db.listLibros.drop()
 db.listLibros.find({})
 
 

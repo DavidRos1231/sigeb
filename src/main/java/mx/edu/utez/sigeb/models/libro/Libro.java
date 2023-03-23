@@ -66,4 +66,12 @@ public class Libro {
         json.put("categoria", this.categoria);
         return json;
     }
+
+    public Libro fromJson(JSONObject libro) {
+        this.libroId = (long) libro.get("id");
+        this.nombre = (String) libro.get("nombre");
+        this.autor = (String) libro.get("autor");
+        this.categoria = (String) libro.get("categoria");
+        return this;
+    }
 }

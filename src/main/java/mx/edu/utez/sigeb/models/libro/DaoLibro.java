@@ -39,7 +39,10 @@ public class DaoLibro {
         }
         return listLibros;
     }
-
+/*
+* String libroId = "12345"; // valor dinámico del libroId
+FindIterable<Document> cursor = collection.find(Filters.eq("libroId", new ObjectId(libroId
+*/
     public Libro getLibro(long id) {
         System.out.println(id);
         Libro libroObject = new Libro();
@@ -47,14 +50,14 @@ public class DaoLibro {
             MongoDatabase database = mongoClient.getDatabase("sigeb").withCodecRegistry(pojoCodecRegistry);
             MongoCollection<Libro> collection = database.getCollection("libros", Libro.class);
             MongoCursor<Libro> cursor = collection.find().iterator();
-            while(cursor.hasNext()){
-                Libro iter=cursor.next();
-                if(iter.getLibroId()==id){
+            while (cursor.hasNext()) {
+                Libro iter = cursor.next();
+                if (iter.getLibroId() == id) {
                     System.out.println(iter);
-                    libroObject=iter;
+                    libroObject = iter;
                     break;
-                }else {
-                    libroObject=null;
+                } else {
+                    libroObject = null;
                 }
             }
         } catch (Exception e) {
@@ -80,5 +83,34 @@ public class DaoLibro {
         return result;
     }
 
+    public boolean updateLibro(Libro libro) {
+        boolean result = false;
+        try (MongoClient mongoClient = Conn.getConnection();) {
+            MongoDatabase database = mongoClient.getDatabase("sigeb").withCodecRegistry(pojoCodecRegistry);
+            MongoCollection<Libro> collection = database.getCollection("libros", Libro.class);
+            Bson filter = eq("libroId", libro.getLibroId());
+            collection.replaceOne(filter, libro);
+            result = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return result;
+        }
+        return result;
+    }
+
+    public boolean deleteLibro(long id) {
+        boolean result = false;
+        try(MongoClient mongoClient = Conn.getConnection();)  {
+            MongoDatabase database = mongoClient.getDatabase("sigeb").withCodecRegistry(pojoCodecRegistry);
+            MongoCollection<Libro> collection = database.getCollection("libros", Libro.class);
+            collection.updateOne(eq("libroId", id), new Document("$set", new Document("enable", 0)));
+            result = true;
+            //collection.deleteOne(eq("libroId", id));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return result;
+        }
+        return result;
+    }
 
 }
