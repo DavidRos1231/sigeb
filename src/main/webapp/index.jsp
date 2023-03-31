@@ -8,7 +8,6 @@
 <h1><%= "Hello World!" %>
 </h1>
 <br/>
-<a href="hello-servlet">Hello Servlet</a>
 <a href="getLibros">getLibro</a>
 <h1>Formulario buscar libro</h1>
 <form action="getLibro" method="get">

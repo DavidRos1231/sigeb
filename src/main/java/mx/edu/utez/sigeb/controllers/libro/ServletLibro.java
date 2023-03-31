@@ -64,6 +64,7 @@ public class ServletLibro extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String opcion = request.getServletPath();
+        PrintWriter out = response.getWriter();
         HttpServletRequest req = (HttpServletRequest) request;
         PrintWriter out = response.getWriter();
         ServiceLibro serviceLibro = new ServiceLibro();
@@ -75,9 +76,13 @@ public class ServletLibro extends HttpServlet {
                     String categoria = request.getParameter("categoria") != null ? request.getParameter("categoria") : "";
                     Libro libro= new Libro(name,autor,categoria);
                     if (new ServiceLibro().saveLibro(libro)) {
-                        System.out.println("se agrego");
+                        msg.put("msg","Se agrego")
+                        out.print(msg);
+                        out.flush();
                     } else {
-                        System.out.println("no se agrego");
+                        msg.put("msg","Error al agregar")
+                        out.print(msg);
+                        out.flush();
                     }
                 break;
             case "/updateLibro":
