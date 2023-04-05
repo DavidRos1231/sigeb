@@ -66,7 +66,6 @@ public class ServletLibro extends HttpServlet {
         String opcion = request.getServletPath();
         PrintWriter out = response.getWriter();
         HttpServletRequest req = (HttpServletRequest) request;
-        PrintWriter out = response.getWriter();
         ServiceLibro serviceLibro = new ServiceLibro();
         switch (opcion) {
             case "/addLibro":
@@ -75,12 +74,19 @@ public class ServletLibro extends HttpServlet {
                     String autor = request.getParameter("autor") != null ? request.getParameter("autor") : "";
                     String categoria = request.getParameter("categoria") != null ? request.getParameter("categoria") : "";
                     Libro libro= new Libro(name,autor,categoria);
+                    if(name.equals("") || autor.equals("") || categoria.equals("")){
+                        msg.put("msg","No se puede dejar campos vacios");
+                        out.print(msg);
+                        out.flush();
+                        break;
+                    }
+                System.out.println(libro.toString());
                     if (new ServiceLibro().saveLibro(libro)) {
-                        msg.put("msg","Se agrego")
+                        msg.put("msg","Se agrego correctamente");
                         out.print(msg);
                         out.flush();
                     } else {
-                        msg.put("msg","Error al agregar")
+                        msg.put("msg","Error al agregar");
                         out.print(msg);
                         out.flush();
                     }
