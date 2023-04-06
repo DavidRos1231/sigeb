@@ -1,4 +1,4 @@
-package mx.edu.utez.sigeb.models;
+package mx.edu.utez.sigeb.models.prestamo;
 
 public class Prestamo {
     private int id;
