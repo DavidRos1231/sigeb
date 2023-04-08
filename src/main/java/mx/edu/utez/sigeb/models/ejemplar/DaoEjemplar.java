@@ -4,7 +4,6 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
-import mx.edu.utez.sigeb.models.libro.Libro;
 import mx.edu.utez.sigeb.utils.Conn;
 import org.bson.codecs.configuration.CodecProvider;
 import org.bson.codecs.configuration.CodecRegistry;
@@ -21,11 +20,11 @@ public class DaoEjemplar {
     CodecProvider pojoCodecProvider = PojoCodecProvider.builder().automatic(true).build();
     CodecRegistry pojoCodecRegistry = fromRegistries(getDefaultCodecRegistry(), fromProviders(pojoCodecProvider));
 
-    public List<Ejemplar> listEjemplar(int id){
+    public List<Ejemplar> listEjemplar(int id) {
         List<Ejemplar> listEjenplar = new ArrayList<>();
         try (MongoClient mongoClient = Conn.getConnection()) {
             MongoDatabase database = mongoClient.getDatabase("sigeb").withCodecRegistry(pojoCodecRegistry);
-            MongoCollection<Ejemplar> collection = database.getCollection("ejemplares", Ejemplar.class);
+            MongoCollection<Ejemplar> collection = database.getCollection("listEjemplares", Ejemplar.class);
             MongoCursor<Ejemplar> cursor = collection.find().iterator();
             while (cursor.hasNext()) {
                 Ejemplar iter = cursor.next();
@@ -39,7 +38,7 @@ public class DaoEjemplar {
         return listEjenplar;
     }
 
-    public boolean guardarEjemplar(Ejemplar ejemplar, int cantidad){
+    public boolean guardarEjemplar(Ejemplar ejemplar, int cantidad) {
         boolean flag = false;
         try (MongoClient mongoClient = Conn.getConnection()) {
             MongoDatabase database = mongoClient.getDatabase("sigeb").withCodecRegistry(pojoCodecRegistry);

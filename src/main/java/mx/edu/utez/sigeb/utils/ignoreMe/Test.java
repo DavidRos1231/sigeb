@@ -1,21 +1,24 @@
 package mx.edu.utez.sigeb.utils.ignoreMe;
+import mx.edu.utez.sigeb.models.Usuario.Usuario;
 import mx.edu.utez.sigeb.models.libro.Libro;
 import mx.edu.utez.sigeb.services.ServiceLibro;
+import mx.edu.utez.sigeb.services.ServiceUsuario;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 
 public class Test {
     public static void main(String[] args) {
-        JSONArray listado = new JSONArray();
-        ServiceLibro serviceLibro = new ServiceLibro();
-        listado = serviceLibro.listLibros();
-        //imprimir listado
-        System.out.println(listado);
+       //pruebas de usuario
+        ServiceUsuario serviceUsuario = new ServiceUsuario();
+        //guardar un usuario
 
-        //obtener un libro
-        JSONObject libro = serviceLibro.getLibro(8);
-        System.out.println("a"+ libro);
+        Usuario usuario = new Usuario("Juan", "Perez", "Ramiez","correo@gmail.com","122" ,1 );
+        if (serviceUsuario.saveUsuario(usuario)){
+            System.out.println("se guardo");
+        }else {
+            System.out.println("no se guardo");
+        }
 
         //actualizar un libro
        /* Libro libro1 = new Libro();
