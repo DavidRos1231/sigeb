@@ -1,9 +1,11 @@
 package mx.edu.utez.sigeb.models.Usuario;
 
+import org.json.simple.JSONObject;
+
 import java.util.Date;
 
 public class Usuario {
-    private String id;
+    private long usuarioId;
     private String name;
     private String midname;
     private String lastname;
@@ -15,8 +17,8 @@ public class Usuario {
 
     public Usuario(){}
 
-    public Usuario(String id, String name, String midname, String lastname, String correo, String password, Date tiempo, int tipo) {
-        this.id = id;
+    public Usuario(long usuarioId, String name, String midname, String lastname, String correo, String password, Date tiempo, int tipo) {
+        this.usuarioId = usuarioId;
         this.name = name;
         this.midname = midname;
         this.lastname = lastname;
@@ -35,27 +37,17 @@ public class Usuario {
         this.tipo = tipo;
     }
 
-
     @Override
     public String toString() {
-        return "Usuario{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", midname='" + midname + '\'' +
-                ", lastname='" + lastname + '\'' +
-                ", correo='" + correo + '\'' +
-                ", password='" + password + '\'' +
-                ", tiempo=" + tiempo +
-                ", tipo=" + tipo +
-                '}';
+        return "Usuario{}";
     }
 
-    public String getId() {
-        return id;
+    public long getUsuarioId() {
+        return usuarioId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setUsuarioId(long usuarioId) {
+        this.usuarioId = usuarioId;
     }
 
     public String getName() {
@@ -112,5 +104,19 @@ public class Usuario {
 
     public void setTipo(int tipo) {
         this.tipo = tipo;
+    }
+
+    public JSONObject toJson() {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("usuarioId", this.usuarioId);
+        jsonObject.put("name", this.name);
+        jsonObject.put("midname", this.midname);
+        jsonObject.put("lastname", this.lastname);
+        jsonObject.put("correo", this.correo);
+        jsonObject.put("password", this.password);
+        jsonObject.put("tiempo", this.tiempo);
+        jsonObject.put("tipo", this.tipo);
+        return jsonObject;
+
     }
 }

@@ -13,12 +13,17 @@ public class Test {
         ServiceUsuario serviceUsuario = new ServiceUsuario();
         //guardar un usuario
 
-        Usuario usuario = new Usuario("Juan", "Perez", "Ramiez","correo@gmail.com","122" ,1 );
+       /* Usuario usuario = new Usuario("Juan", "Perez", "Ramiez","correo@gmail.com","122" ,1 );
         if (serviceUsuario.saveUsuario(usuario)){
             System.out.println("se guardo");
         }else {
             System.out.println("no se guardo");
-        }
+        }*/
+        JSONArray usuarios = serviceUsuario.listUsuarios();
+        System.out.println(usuarios);
+
+
+
 
         //actualizar un libro
        /* Libro libro1 = new Libro();
