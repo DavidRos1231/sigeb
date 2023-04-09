@@ -11,13 +11,14 @@ public class Usuario {
     private String lastname;
     private String correo;
     private String password;
-
     private Date tiempo;
     private int tipo;
 
+    private int enable;
+
     public Usuario(){}
 
-    public Usuario(long usuarioId, String name, String midname, String lastname, String correo, String password, Date tiempo, int tipo) {
+    public Usuario(long usuarioId, String name, String midname, String lastname, String correo, String password, Date tiempo, int tipo, int enable) {
         this.usuarioId = usuarioId;
         this.name = name;
         this.midname = midname;
@@ -26,6 +27,7 @@ public class Usuario {
         this.password = password;
         this.tiempo = tiempo;
         this.tipo = tipo;
+        this.enable = enable;
     }
 
     public Usuario(String juan, String perez, String ramiez, String mail, String number, int tipo) {
@@ -106,6 +108,14 @@ public class Usuario {
         this.tipo = tipo;
     }
 
+    public int getEnable() {
+        return enable;
+    }
+
+    public void setEnable(int enable) {
+        this.enable = enable;
+    }
+
     public JSONObject toJson() {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("usuarioId", this.usuarioId);
@@ -116,7 +126,21 @@ public class Usuario {
         jsonObject.put("password", this.password);
         jsonObject.put("tiempo", this.tiempo);
         jsonObject.put("tipo", this.tipo);
+        jsonObject.put("enable", this.enable);
         return jsonObject;
 
+    }
+
+    public Usuario fromJson(JSONObject usuario) {
+        this.usuarioId = (long) usuario.get("usuarioId");
+        this.name = (String) usuario.get("name");
+        this.midname = (String) usuario.get("midname");
+        this.lastname = (String) usuario.get("lastname");
+        this.correo = (String) usuario.get("correo");
+        this.password = (String) usuario.get("password");
+        this.tiempo = (Date) usuario.get("tiempo");
+        this.tipo = (int) usuario.get("tipo");
+        this.enable = (int) usuario.get("enable");
+        return this;
     }
 }
