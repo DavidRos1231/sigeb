@@ -5,7 +5,7 @@ import org.json.simple.JSONObject;
 import java.util.Date;
 
 public class Usuario {
-    private long usuarioId;
+    private String usuarioId;
     private String name;
     private String midname;
     private String lastname;
@@ -18,16 +18,15 @@ public class Usuario {
 
     public Usuario(){}
 
-    public Usuario(long usuarioId, String name, String midname, String lastname, String correo, String password, Date tiempo, int tipo, int enable) {
+    //constructor para el consumo
+    public Usuario(String usuarioId, String name, String midname, String lastname, String correo, String password, int tipo) {
         this.usuarioId = usuarioId;
         this.name = name;
         this.midname = midname;
         this.lastname = lastname;
         this.correo = correo;
         this.password = password;
-        this.tiempo = tiempo;
         this.tipo = tipo;
-        this.enable = enable;
     }
 
     public Usuario(String juan, String perez, String ramiez, String mail, String number, int tipo) {
@@ -44,11 +43,11 @@ public class Usuario {
         return "Usuario{}";
     }
 
-    public long getUsuarioId() {
+    public String getUsuarioId() {
         return usuarioId;
     }
 
-    public void setUsuarioId(long usuarioId) {
+    public void setUsuarioId(String usuarioId) {
         this.usuarioId = usuarioId;
     }
 
@@ -132,7 +131,7 @@ public class Usuario {
     }
 
     public Usuario fromJson(JSONObject usuario) {
-        this.usuarioId = (long) usuario.get("usuarioId");
+        this.usuarioId = (String) usuario.get("usuarioId");
         this.name = (String) usuario.get("name");
         this.midname = (String) usuario.get("midname");
         this.lastname = (String) usuario.get("lastname");
