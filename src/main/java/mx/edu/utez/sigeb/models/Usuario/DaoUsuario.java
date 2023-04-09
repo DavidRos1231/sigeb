@@ -62,7 +62,7 @@ public class DaoUsuario {
             MongoCursor cursor = collection.find().iterator();
             while (cursor.hasNext()) {
                 Usuario iter = (Usuario) cursor.next();
-                if (iter.getUsuarioId() == id) {
+                if (iter.getUsuarioId().equals(id)) {
                     usuario = iter;
                     break;
                 } else {
